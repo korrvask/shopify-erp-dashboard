@@ -16,13 +16,13 @@ export default function InventoryPage() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4">Inventory</h1>
+      <h1 className="text-2xl font-bold mb-6 text-gray-800">Inventory</h1>
       <ul className="space-y-4">
         {products.map((product) => (
-          <li key={product.product_id} className="bg-white text-black p-4 rounded shadow">
-            <p><strong>{product.product_name}</strong></p>
-            <p>SKU: {product.sku}</p>
-            <p>Quantity: {product.inventory_quantity}</p>
+          <li key={product.product_id} className="bg-white text-black p-6 rounded-lg shadow">
+            <p className="font-semibold">{product.product_name}</p>
+            <p className="text-gray-600">SKU: {product.sku}</p>
+            <p className="text-gray-600">Quantity: {product.inventory_quantity}</p>
           </li>
         ))}
       </ul>

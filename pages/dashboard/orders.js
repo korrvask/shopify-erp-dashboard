@@ -16,12 +16,12 @@ export default function OrdersPage() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">Orders</h1>
+      <h1 className="text-2xl font-bold mb-6 text-gray-800">Orders</h1>
       <ul className="space-y-4">
         {orders.map((order) => (
           <li
             key={order.order_id}
-            className="bg-white text-black p-6 rounded-xl shadow border"
+            className="bg-white text-black p-6 rounded-lg shadow border"
           >
             <p className="mb-2"><strong>Order ID:</strong> {order.order_id}</p>
             <p className="mb-2"><strong>Total:</strong> ₱{order.total_price}</p>
