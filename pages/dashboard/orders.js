@@ -18,8 +18,12 @@ export default function OrdersPage() {
           shipping_address_id,
           billing_address_id
         `);
-      if (error) console.error('Error fetching orders:', error);
-      else setOrders(data);
+      if (error) {
+        console.error('Error fetching orders:', error);
+      } else {
+        console.log('Fetched orders from Supabase:', data); // 👈 log this to verify connection
+        setOrders(data);
+      }
     }
     fetchOrders();
   }, []);
