@@ -7,7 +7,17 @@ export default function OrdersPage() {
 
   useEffect(() => {
     async function fetchOrders() {
-      const { data, error } = await supabase.from('orders').select('*');
+      const { data, error } = await supabase
+        .from('orders')
+        .select(`
+          order_id,
+          customer_id,
+          total_price,
+          order_date,
+          order_line_items:order_line_items(product_id, quantity, price),
+          shipping_address_id,
+          billing_address_id
+        `);
       if (error) console.error('Error fetching orders:', error);
       else setOrders(data);
     }
@@ -16,22 +26,29 @@ export default function OrdersPage() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Orders</h1>
-      <ul className="space-y-4">
-        {orders.map((order) => (
-          <li
-            key={order.order_id}
-            className="bg-white text-black p-6 rounded-lg shadow border"
-          >
-            <p className="mb-2"><strong>Order ID:</strong> {order.order_id}</p>
-            <p className="mb-2"><strong>Total:</strong> ₱{order.total_price}</p>
-            <p className="mb-4"><strong>Date:</strong> {new Date(order.order_date).toLocaleDateString()}</p>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-              View Details
-            </button>
-          </li>
-        ))}
-      </ul>
+      <h1 className="text-2xl font-bold mb-4">Orders</h1>
+      <table className="min-w-full bg-white border">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="py-2 px-4 border">Order ID</th>
+            <th className="py-2 px-4 border">Customer ID</th>
+            <th className="py-2 px-4 border">Total Price</th>
+            <th className="py-2 px-4 border">Date</th>
+            <th className="py-2 px-4 border">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order) => (
+            <tr key={order.order_id} className="border-t">
+              <td className="py-2 px-4 border">{order.order_id}</td>
+              <td className="py-2 px-4 border">{order.customer_id}</td>
+              <td className="py-2 px-4 border">₱{order.total_price}</td>
+              <td className="py-2 px-4 border">{new Date(order.order_date).toLocaleDateString()}</td>
+              <td className="py-2 px-4 border">Processing</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </Layout>
   );
 }

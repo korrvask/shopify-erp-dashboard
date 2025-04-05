@@ -7,25 +7,46 @@ export default function InventoryPage() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const { data, error } = await supabase.from('products').select('*');
+      const { data, error } = await supabase
+        .from('products')
+        .select('product_id, product_name, SKU, inventory_quantity, price');
       if (error) console.error('Error fetching products:', error);
       else setProducts(data);
     }
     fetchProducts();
   }, []);
 
+  function getStatus(quantity) {
+    if (quantity === 0) return 'Out of Stock';
+    if (quantity < 5) return 'Low Stock';
+    return 'In Stock';
+  }
+
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Inventory</h1>
-      <ul className="space-y-4">
-        {products.map((product) => (
-          <li key={product.product_id} className="bg-white text-black p-6 rounded-lg shadow">
-            <p className="font-semibold">{product.product_name}</p>
-            <p className="text-gray-600">SKU: {product.sku}</p>
-            <p className="text-gray-600">Quantity: {product.inventory_quantity}</p>
-          </li>
-        ))}
-      </ul>
+      <h1 className="text-2xl font-bold mb-4">Inventory</h1>
+      <table className="min-w-full bg-white border">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="py-2 px-4 border">SKU</th>
+            <th className="py-2 px-4 border">Name</th>
+            <th className="py-2 px-4 border">Quantity</th>
+            <th className="py-2 px-4 border">Price</th>
+            <th className="py-2 px-4 border">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((p) => (
+            <tr key={p.product_id} className="border-t">
+              <td className="py-2 px-4 border">{p.SKU}</td>
+              <td className="py-2 px-4 border">{p.product_name}</td>
+              <td className="py-2 px-4 border">{p.inventory_quantity}</td>
+              <td className="py-2 px-4 border">₱{p.price}</td>
+              <td className="py-2 px-4 border">{getStatus(p.inventory_quantity)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </Layout>
   );
 }
