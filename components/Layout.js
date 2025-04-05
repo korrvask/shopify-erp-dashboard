@@ -4,31 +4,31 @@ import { useRouter } from 'next/router';
 export default function Layout({ children }) {
   const router = useRouter();
 
-  const links = [
-    { name: 'Inventory', path: '/dashboard/inventory' },
-    { name: 'Orders', path: '/dashboard/orders' },
-    { name: 'Customers', path: '/dashboard/customers' },
-    { name: 'Sales', path: '/dashboard/sales' },
+  const navItems = [
+    { href: '/dashboard/inventory', label: 'Inventory' },
+    { href: '/dashboard/orders', label: 'Orders' },
+    { href: '/dashboard/customers', label: 'Customers' },
+    { href: '/dashboard/sales', label: 'Sales' }
   ];
 
   return (
     <div className="min-h-screen bg-[#F7F7F7] text-[#212121]">
-      <nav className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex space-x-6 font-medium text-sm">
-          {links.map((link) => (
+      <nav className="bg-white shadow-sm py-4">
+        <div className="max-w-7xl mx-auto px-6 flex space-x-8 text-sm font-medium">
+          {navItems.map((item) => (
             <Link
-              key={link.path}
-              href={link.path}
-              className={`hover:text-blue-600 ${
-                router.pathname === link.path ? 'text-blue-600 font-semibold' : ''
+              key={item.href}
+              href={item.href}
+              className={`hover:text-blue-600 transition ${
+                router.pathname === item.href ? 'text-blue-600 font-semibold' : ''
               }`}
             >
-              {link.name}
+              {item.label}
             </Link>
           ))}
         </div>
       </nav>
-      <main className="max-w-7xl mx-auto p-6">{children}</main>
+      <main className="max-w-7xl mx-auto px-6 py-8">{children}</main>
     </div>
   );
 }
