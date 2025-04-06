@@ -1,28 +1,58 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-[#F7F7F7] text-[#212121] font-sans flex">
-      {/* Sidebar Menu */}
-      <nav className="bg-white shadow w-64 h-screen p-6 flex flex-col space-y-4 text-sm font-medium">
-        <h2 className="text-lg font-bold mb-4">Menu</h2>
-        <Link href="/dashboard/inventory" className="hover:text-blue-600 py-2">
-          Inventory
-        </Link>
-        <Link href="/dashboard/orders" className="hover:text-blue-600 py-2">
-          Orders
-        </Link>
-        <Link href="/dashboard/customers" className="hover:text-blue-600 py-2">
-          Customers
-        </Link>
-        <Link href="/dashboard/sales" className="hover:text-blue-600 py-2">
-          Sales
-        </Link>
-      </nav>
-      {/* Main Content */}
-      <main className="flex-1 p-8">
-        <div className="max-w-7xl mx-auto">{children}</div>
-      </main>
+    <div className="flex min-h-screen bg-[#F7F7F7] text-[#212121] font-dg">
+      {/* Sidebar */}
+      <aside className="w-24 bg-black text-white flex flex-col items-center border-r-2 border-[#DADEE0]">
+        {/* Logo with 40px top padding */}
+        <div className="pt-[40px]">
+          <Link href="/">
+            <Image
+              src="/km.svg"
+              alt="Kilaeko Logo"
+              width={40}
+              height={40}
+              className="cursor-pointer"
+            />
+          </Link>
+        </div>
+
+
+        {/* Vertical navigation buttons */}
+        <div className="flex-1 flex items-center">
+          <nav className="flex flex-col items-center space-y-[10px] text-[30px] font-normal text-white">
+            <Link
+              href="/dashboard/inventory"
+              className="hover:opacity-70 px-[40px]"
+            >
+              Inventory
+            </Link>
+            <Link
+              href="/dashboard/orders"
+              className="hover:opacity-70 px-[40px]"
+            >
+              Orders
+            </Link>
+            <Link
+              href="/dashboard/customers"
+              className="hover:opacity-70 px-[40px]"
+            >
+              Customers
+            </Link>
+            <Link
+              href="/dashboard/sales"
+              className="hover:opacity-70 px-[40px]"
+            >
+              Sales
+            </Link>
+          </nav>
+        </div>
+      </aside>
+
+      {/* Main dashboard content */}
+      <main className="flex-1 p-6">{children}</main>
     </div>
   );
 }

@@ -1,33 +1,43 @@
+import { useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Home() { 
-  return (
-    <div className="bg-white text-black p-6 shadow-md rounded-lg">
-      <h1 className="text-3xl font-bold mb-4">Kilaeko</h1>
-      <p className="text-gray-700 mb-6">ERP System</p>
+export default function Home() {
+  useEffect(() => {
+    async function testSupabase() {
+      const { data, error } = await supabase.from('products').select('*');
+      if (error) {
+        console.error('Supabase connection failed:', error);
+      } else {
+        console.log('Connected to Supabase. Products:', data);
+      }
+    }
+    testSupabase();
+  }, []);
 
-      <div className="flex flex-wrap gap-4">
-        <Link href="/dashboard/inventory">
-          <span className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition">
-            Inventory
-          </span>
-        </Link>
-        <Link href="/dashboard/orders">
-          <span className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition">
-            Orders
-          </span>
-        </Link>
-        <Link href="/dashboard/customers">
-          <span className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition">
-            Customers
-          </span>
-        </Link>
-        <Link href="/dashboard/sales">
-          <span className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition">
-            Sales
-          </span>
-        </Link>
-      </div>
+  return (
+    <div className="flex min-h-screen bg-[#F7F7F7] text-[#212121] font-dg">
+      {/* Sidebar */}
+      <aside className="w-24 bg-black text-white flex flex-col items-center border-r-2 border-[#DADEE0]">
+        <div className="pt-[40px]">
+          <Image src="/km.svg" alt="Kilaeko Logo" width={40} height={40} />
+        </div>
+
+        <div className="flex-1 flex items-center">
+          <nav className="flex flex-col items-center space-y-[10px] text-[30px] font-normal text-white">
+            <Link href="/dashboard/inventory" className="hover:opacity-70 px-[40px]">Inventory</Link>
+            <Link href="/dashboard/orders" className="hover:opacity-70 px-[40px]">Orders</Link>
+            <Link href="/dashboard/customers" className="hover:opacity-70 px-[40px]">Customers</Link>
+            <Link href="/dashboard/sales" className="hover:opacity-70 px-[40px]">Sales</Link>
+          </nav>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 p-6 pt-[40px] flex justify-center">
+        <h1 className="text-4xl font-bold mb-6 text-center">Kilaeko Admin Dashboard</h1>
+      </main>
     </div>
   );
 }

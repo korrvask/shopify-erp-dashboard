@@ -9,13 +9,7 @@ export default function CustomersPage() {
     async function fetchCustomers() {
       const { data, error } = await supabase
         .from('customers')
-        .select(`
-          customer_id,
-          first_name,
-          last_name,
-          email,
-          phone
-        `);
+        .select('customer_id, first_name, last_name, email, phone');
       if (error) console.error('Error fetching customers:', error);
       else setCustomers(data);
     }
@@ -24,11 +18,11 @@ export default function CustomersPage() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4">Customers</h1>
+      <h1 className="text-2xl font-bold mb-4 pb-[10px] pt-[10px] pl-[20px]">Customers</h1>
       <table className="min-w-full bg-white border">
         <thead>
           <tr className="bg-gray-100">
-            <th className="py-2 px-4 border">Customer ID</th>
+            <th className="py-2 px-4 border">ID</th>
             <th className="py-2 px-4 border">Name</th>
             <th className="py-2 px-4 border">Email</th>
             <th className="py-2 px-4 border">Phone</th>

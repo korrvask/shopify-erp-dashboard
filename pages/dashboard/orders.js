@@ -13,24 +13,17 @@ export default function OrdersPage() {
           order_id,
           customer_id,
           total_price,
-          order_date,
-          order_line_items:order_line_items(product_id, quantity, price),
-          shipping_address_id,
-          billing_address_id
+          order_date
         `);
-      if (error) {
-        console.error('Error fetching orders:', error);
-      } else {
-        console.log('Fetched orders from Supabase:', data); // 👈 log this to verify connection
-        setOrders(data);
-      }
+      if (error) console.error('Error fetching orders:', error);
+      else setOrders(data);
     }
     fetchOrders();
   }, []);
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4">Orders</h1>
+      <h1 className="text-2xl font-bold mb-4 pb-[10px] pt-[10px] pl-[20px]">Orders</h1>
       <table className="min-w-full bg-white border">
         <thead>
           <tr className="bg-gray-100">

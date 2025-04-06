@@ -9,12 +9,7 @@ export default function SalesPage() {
     async function fetchSales() {
       const { data, error } = await supabase
         .from('orders')
-        .select(`
-          order_id,
-          customer_id,
-          total_price,
-          order_date
-        `);
+        .select('order_id, customer_id, total_price, order_date');
       if (error) console.error('Error fetching sales:', error);
       else setOrders(data);
     }
@@ -27,7 +22,7 @@ export default function SalesPage() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold mb-4">Sales</h1>
+      <h1 className="text-2xl font-bold mb-4 pb-[10px] pt-[10px] pl-[20px]">Sales</h1>
       <table className="min-w-full bg-white border">
         <thead>
           <tr className="bg-gray-100">
@@ -49,7 +44,7 @@ export default function SalesPage() {
         </tbody>
       </table>
 
-      <div className="mt-6">
+      <div className="mt-6 space-y-2 pl-[20px]">
         <p><strong>Total Revenue:</strong> ₱{totalRevenue.toFixed(2)}</p>
         <p><strong>Total Orders:</strong> {totalOrders}</p>
         <p><strong>Average Order Value:</strong> ₱{averageOrder.toFixed(2)}</p>
