@@ -19,26 +19,28 @@ export default function CustomersPage() {
   return (
     <Layout>
       <h1 className="text-2xl font-bold mb-4 pb-[10px] pt-[10px] pl-[20px]">Customers</h1>
-      <table className="min-w-full bg-white border">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="py-2 px-4 border">ID</th>
-            <th className="py-2 px-4 border">Name</th>
-            <th className="py-2 px-4 border">Email</th>
-            <th className="py-2 px-4 border">Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map((c) => (
-            <tr key={c.customer_id} className="border-t">
-              <td className="py-2 px-4 border">{c.customer_id}</td>
-              <td className="py-2 px-4 border">{c.first_name} {c.last_name}</td>
-              <td className="py-2 px-4 border">{c.email}</td>
-              <td className="py-2 px-4 border">{c.phone}</td>
+      <div className="pl-[20px] pr-[20px]">
+        <table className="min-w-full bg-white border">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="py-2 px-4 border">ID</th>
+              <th className="py-2 px-4 border">Name</th>
+              <th className="py-2 px-4 border">Email</th>
+              <th className="py-2 px-4 border">Phone</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {customers.map((c) => (
+              <tr key={c.customer_id} className="border-t">
+                <td className="py-2 px-4 border">{c.customer_id}</td>
+                <td className="py-2 px-4 border">{c.first_name} {c.last_name}</td>
+                <td className="py-2 px-4 border">{c.email}</td>
+                <td className="py-2 px-4 border">{c.phone}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </Layout>
   );
 }
