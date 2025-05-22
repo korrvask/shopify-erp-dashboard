@@ -29,6 +29,7 @@ export default function Home() {
             <Link href="/dashboard/inventory" className="hover:opacity-70 px-[40px]">Inventory</Link>
             <Link href="/dashboard/orders" className="hover:opacity-70 px-[40px]">Orders</Link>
             <Link href="/dashboard/customers" className="hover:opacity-70 px-[40px]">Customers</Link>
+            <Link href="/dashboard/products" className="hover:opacity-70 px-[40px]">Products</Link>
             <Link href="/dashboard/sales" className="hover:opacity-70 px-[40px]">Sales</Link>
           </nav>
         </div>

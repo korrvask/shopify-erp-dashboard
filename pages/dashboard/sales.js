@@ -6,15 +6,15 @@ export default function SalesPage() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    async function fetchSales() {
-      const { data, error } = await supabase
-        .from('orders')
-        .select('order_id, customer_id, total_price, order_date');
-      if (error) console.error('Error fetching sales:', error);
-      else setOrders(data);
-    }
-    fetchSales();
+    fetchOrders();
   }, []);
+
+  async function fetchOrders() {
+    const { data, error } = await supabase
+      .from('orders')
+      .select('order_id, customer_id, total_price, order_date');
+    if (!error) setOrders(data);
+  }
 
   const totalRevenue = orders.reduce((sum, o) => sum + parseFloat(o.total_price || 0), 0);
   const totalOrders = orders.length;

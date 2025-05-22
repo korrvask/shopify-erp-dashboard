@@ -19,7 +19,6 @@ export default function Layout({ children }) {
           </Link>
         </div>
 
-
         {/* Vertical navigation buttons */}
         <div className="flex-1 flex items-center">
           <nav className="flex flex-col items-center space-y-[10px] text-[30px] font-normal text-white">
@@ -40,6 +39,12 @@ export default function Layout({ children }) {
               className="hover:opacity-70 px-[40px]"
             >
               Customers
+            </Link>
+            <Link
+              href="/dashboard/products"
+              className="hover:opacity-70 px-[40px]"
+            >
+              Products
             </Link>
             <Link
               href="/dashboard/sales"
